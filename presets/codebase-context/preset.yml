@@ -3,8 +3,8 @@ schema_version: "1.0"
 preset:
   id: "codebase-context"
   name: "Codebase Context"
-  version: "1.0.0"
-  description: "Augment planning, task generation, and implementation with optional repository context"
+  version: "1.1.0"
+  description: "Augment planning, task generation, analysis, and implementation with optional repository context"
   author: "Local Project"
   license: "MIT"
 
@@ -23,6 +23,12 @@ provides:
       name: "speckit.tasks"
       file: "commands/speckit.tasks.md"
       description: "Use repository context while generating tasks"
+      strategy: "replace"
+
+    - type: "command"
+      name: "speckit.analyze"
+      file: "commands/speckit.analyze.md"
+      description: "Check design artifacts against repository context before implementation"
       strategy: "replace"
 
     - type: "command"

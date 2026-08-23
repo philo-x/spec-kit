@@ -64,11 +64,11 @@ You **MUST** consider the user input before proceeding (if not empty).
 2. **Load context**:
    - Read FEATURE_SPEC to understand the feature scope and requirements.
    - **IF EXISTS**: Read `/memory/constitution.md` for applicable engineering principles and quality gates.
-   - **IF EXISTS**: Read `.specify/memory/codebase-context.md` for the architecture baseline, existing package map, base entity and persistence conventions, security standards, and repository validation commands.
+   - **IF EXISTS**: Read `.specify/memory/codebase-context.md` for the architecture baseline, existing module and package map, data-model and persistence conventions, interface-boundary conventions, security standards, and repository validation commands.
    - Load the IMPL_PLAN template (already copied).
 
 3. **Execute plan workflow**: Follow the structure in the IMPL_PLAN template to:
-   - Fill Technical Context from `codebase-context.md` where it provides the framework and dependency versions, base entity, database driver, and test stack. Mark an item as "NEEDS CLARIFICATION" only when the feature specification and codebase context do not cover it.
+   - Fill Technical Context from `codebase-context.md` where it provides the framework and dependency versions, data-model conventions, storage drivers, and test stack. Mark an item as "NEEDS CLARIFICATION" only when the feature specification and codebase context do not cover it.
    - Fill Constitution Check section from constitution
    - Evaluate gates (ERROR if violations unjustified)
    - Phase 0: Generate research.md (resolve all NEEDS CLARIFICATION)
@@ -124,12 +124,12 @@ Command ends after Phase 1 design. Report branch, IMPL_PLAN path, and generated 
 
 2. **Generate and dispatch research agents**:
 
-   - **IF `codebase-context.md` EXISTS**: For technology and architecture it already covers, first explore the feature's code anchors (target module, package location, and DAO or persistence registration point). Prefer an available code graph for structural discovery; if unavailable or insufficient, use the agent's built-in repository search and file inspection tools. Record the findings as architecture decisions in `research.md`. Dispatch external research only for technology choices not covered by the codebase context.
+   - **IF `codebase-context.md` EXISTS**: For baseline technology and architecture facts it already covers, first explore the feature's code anchors (target module, package location, and persistence or data-access integration point). Prefer an available code graph for structural discovery; if unavailable or insufficient, use the agent's built-in repository search and file inspection tools. Record the findings as architecture decisions in `research.md`. Treat the context as coverage of those baseline facts only: still research feature-specific APIs, version compatibility, security-sensitive behavior, unfamiliar integration details, and any design question whose answer remains unknown.
 
    ```text
    For each unknown in Technical Context:
      Task: "Research {unknown} for {feature context}"
-   For each technology choice not covered by codebase-context.md:
+   For each technology choice or feature-specific question not fully covered by verified context and repository findings:
      Task: "Find best practices for {tech} in {domain}"
    ```
 
@@ -148,13 +148,13 @@ Command ends after Phase 1 design. Report branch, IMPL_PLAN path, and generated 
    - Entity name, fields, relationships
    - Validation rules from requirements
    - State transitions if applicable
-   - **IF `codebase-context.md` EXISTS**: Apply its entity and persistence conventions when selecting entity base classes and primary-key strategies.
+   - **IF `codebase-context.md` EXISTS**: Apply its data-model and persistence conventions when selecting shared model types, identifier strategies, and persistence or data-access integration points.
 
 2. **Define interface contracts** (if project has external interfaces) → `/contracts/`:
    - Identify what interfaces the project exposes to users or other systems
    - Document the contract format appropriate for the project type
    - Examples: public APIs for libraries, command schemas for CLI tools, endpoints for web services, grammars for parsers, UI contracts for applications
-   - **IF `codebase-context.md` EXISTS**: Apply its controller and response-wrapper conventions when defining contracts.
+   - **IF `codebase-context.md` EXISTS**: Apply its interface-boundary and response/error-envelope conventions when defining contracts, whether the boundary is an API handler, controller, resolver, CLI, library interface, or UI integration.
    - Skip if project is purely internal (build scripts, one-off tools, etc.)
 
 3. **Create quickstart validation guide** → `quickstart.md`:

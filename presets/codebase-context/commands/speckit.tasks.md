@@ -66,7 +66,7 @@ You **MUST** consider the user input before proceeding (if not empty).
    - **Required**: plan.md (tech stack, libraries, structure), spec.md (user stories with priorities)
    - **Optional**: data-model.md (entities), contracts/ (interface contracts), research.md (decisions), quickstart.md (test scenarios)
    - **IF EXISTS**: Load `/memory/constitution.md` for project principles and governance constraints
-   - **IF EXISTS**: Load `.specify/memory/codebase-context.md` for the existing module structure, package-path conventions, and persistence conventions
+   - **IF EXISTS**: Load `.specify/memory/codebase-context.md` for the existing module structure, package-path conventions, persistence/data-access integration points, and interface-boundary conventions
    - Note: Not all projects have all documents. Generate tasks based on what's available.
 
 3. **Execute task generation workflow**:
@@ -75,7 +75,7 @@ You **MUST** consider the user input before proceeding (if not empty).
    - If data-model.md exists: Extract entities and map to user stories
    - If contracts/ exists: Map interface contracts to user stories
    - If research.md exists: Extract decisions for setup tasks
-   - If codebase-context.md exists: When generating Setup and Foundational phase tasks, use its module and persistence conventions to identify concrete code anchors, including package paths and DAO or persistence registration points. Avoid tasks that conflict with the existing architecture.
+   - If codebase-context.md exists: When generating Setup and Foundational phase tasks, use its module and persistence conventions to identify concrete code anchors, including package paths and repository, mapper, ORM, schema-registration, or other data-access integration points. Avoid accidental conflicts with the existing architecture. If the design explicitly changes that architecture, generate the migration, compatibility, and validation tasks required to make the change safely.
    - Generate tasks organized by user story (see Task Generation Rules below)
    - Generate dependency graph showing user story completion order
    - Create parallel execution examples per user story

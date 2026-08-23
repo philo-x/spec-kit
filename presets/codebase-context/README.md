@@ -1,9 +1,10 @@
 # Codebase Context
 
-This preset augments the core `plan`, `tasks`, and `implement` commands with
-optional repository context from `.specify/memory/codebase-context.md`.
+This preset augments the core `plan`, `tasks`, `analyze`, and `implement`
+commands with optional repository context from
+`.specify/memory/codebase-context.md`.
 
-It replaces the three core commands with complete English command files based
+It replaces the four core commands with complete English command files based
 on Spec Kit v1.0.1. The codebase-aware instructions are embedded at the same
 workflow points as the original customized skills, while the original script
 selection, frontmatter, hooks, and native agent command references remain
@@ -15,12 +16,14 @@ resynchronize them when upgrading Spec Kit.
 
 ## Context Contract
 
-The preset expects another process to create and maintain
-`.specify/memory/codebase-context.md`. When present, the file may describe:
+The preset expects another process to create, refresh, and maintain
+`.specify/memory/codebase-context.md`. It does not generate the file or check
+whether its contents are fresh. When present, the file may describe:
 
 - the architecture baseline and module/package map;
 - framework and dependency versions;
-- entity, primary-key, persistence, DAO, and controller conventions;
+- data-model base types, identifier strategies, persistence/data-access
+  integration points, and interface-boundary conventions;
 - security standards; and
 - test and build commands.
 
@@ -33,6 +36,7 @@ workflow.
 |---------|----------------|
 | `speckit.plan` | Uses existing architecture and conventions to fill Technical Context, focus repository discovery, limit external research, and shape data models and contracts. |
 | `speckit.tasks` | Uses module and persistence conventions to anchor Setup and Foundational tasks in the existing codebase. |
+| `speckit.analyze` | Optionally checks plan and task references against repository context and corroborating repository evidence before implementation. |
 | `speckit.implement` | Loads coding conventions and repository-specific validation commands before executing tasks. |
 
 ## Installation
@@ -48,6 +52,7 @@ Verify the composed commands:
 ```bash
 specify preset resolve speckit.plan
 specify preset resolve speckit.tasks
+specify preset resolve speckit.analyze
 specify preset resolve speckit.implement
 ```
 

@@ -94,7 +94,7 @@ You **MUST** consider the user input before proceeding (if not empty).
    - **IF EXISTS**: Read contracts/ for API specifications and test requirements
    - **IF EXISTS**: Read research.md for technical decisions and constraints
    - **IF EXISTS**: Read /memory/constitution.md for governance constraints
-   - **IF EXISTS**: Read `.specify/memory/codebase-context.md` for coding conventions and repository-specific validation commands, including the test framework and build commands
+   - **IF EXISTS**: Read `.specify/memory/codebase-context.md` for coding conventions and repository-specific validation commands, including the test framework and build commands. Before running a test, build, lint, or other validation command from this file, confirm it is still supported by the repository's current build configuration, CI configuration, or documentation. If it is no longer valid, derive the appropriate replacement from the current repository configuration and report the substitution in the implementation summary.
    - **IF EXISTS**: Read quickstart.md for integration scenarios
 
 4. **Project Setup Verification**:
