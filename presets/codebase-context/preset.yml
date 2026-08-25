@@ -3,8 +3,8 @@ schema_version: "1.0"
 preset:
   id: "codebase-context"
   name: "Codebase Context"
-  version: "1.1.0"
-  description: "Augment planning, task generation, analysis, and implementation with optional repository context"
+  version: "1.2.0"
+  description: "Generate verified repository context and use it across planning, tasks, analysis, and implementation"
   author: "Local Project"
   license: "MIT"
 
@@ -13,6 +13,12 @@ requires:
 
 provides:
   templates:
+    - type: "command"
+      name: "speckit.codebase-context"
+      file: "commands/speckit.codebase-context.md"
+      description: "Generate or refresh verified repository context"
+      strategy: "replace"
+
     - type: "command"
       name: "speckit.plan"
       file: "commands/speckit.plan.md"
@@ -35,6 +41,12 @@ provides:
       name: "speckit.implement"
       file: "commands/speckit.implement.md"
       description: "Use repository context while implementing tasks"
+      strategy: "replace"
+
+    - type: "template"
+      name: "codebase-context-template"
+      file: "templates/codebase-context-template.md"
+      description: "Stable output structure for verified repository context"
       strategy: "replace"
 
 tags:
