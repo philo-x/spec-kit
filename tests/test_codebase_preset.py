@@ -1,19 +1,19 @@
-"""Tests for the local codebase-context preset."""
+"""Tests for the local codebase preset."""
 
 from pathlib import Path
 
 from specify_cli.presets import PresetManager, PresetManifest, PresetResolver
 
 
-PRESET_DIR = Path(__file__).parent.parent / "presets" / "codebase-context"
+PRESET_DIR = Path(__file__).parent.parent / "presets" / "codebase"
 CORE_OVERRIDE_COMMAND_NAMES = (
     "speckit.plan",
     "speckit.tasks",
     "speckit.analyze",
     "speckit.implement",
 )
-GENERATOR_COMMAND_NAME = "speckit.codebase-context"
-OUTPUT_TEMPLATE_NAME = "codebase-context-template"
+GENERATOR_COMMAND_NAME = "speckit.codebase"
+OUTPUT_TEMPLATE_NAME = "codebase-template"
 ALL_COMMAND_NAMES = (GENERATOR_COMMAND_NAME, *CORE_OVERRIDE_COMMAND_NAMES)
 CORE_MARKERS = {
     "speckit.plan": "## Mandatory Post-Execution Hooks",
@@ -34,7 +34,7 @@ def test_manifest_declares_replace_layers():
     expected_entries = {("command", name) for name in ALL_COMMAND_NAMES}
     expected_entries.add(("template", OUTPUT_TEMPLATE_NAME))
 
-    assert manifest.id == "codebase-context"
+    assert manifest.id == "codebase"
     assert manifest.version == "1.2.0"
     assert manifest.requires_speckit_version == ">=1.0.1"
     assert {
@@ -48,7 +48,7 @@ def test_replacement_commands_are_complete_english_commands():
         command_file = PRESET_DIR / "commands" / f"{command_name}.md"
         content = command_file.read_text(encoding="utf-8")
 
-        assert ".specify/memory/codebase-context.md" in content
+        assert ".specify/memory/codebase.md" in content
         assert content.startswith("---\n")
         assert "scripts:" in content
         assert "## User Input" in content
@@ -76,7 +76,7 @@ def test_install_resolves_replacement_without_composition(tmp_path):
         command_file = PRESET_DIR / "commands" / f"{command_name}.md"
         assert content == command_file.read_text(encoding="utf-8")
         assert CORE_MARKERS[command_name] in content
-        assert ".specify/memory/codebase-context.md" in content
+        assert ".specify/memory/codebase.md" in content
         assert "scripts:" in content
 
 
@@ -87,13 +87,13 @@ def test_generator_command_is_complete_and_uses_current_backend_contract():
     assert content.startswith("---\n")
     assert "## User Input" in content
     assert "## Done When" in content
-    assert ".specify/memory/codebase-context.md" in content
-    assert "scripts/bash/resolve-template.sh codebase-context-template --json" in content
+    assert ".specify/memory/codebase.md" in content
+    assert "scripts/bash/resolve-template.sh codebase-template --json" in content
     assert (
-        "scripts/powershell/resolve-template.ps1 codebase-context-template -Json"
+        "scripts/powershell/resolve-template.ps1 codebase-template -Json"
         in content
     )
-    assert "scripts/python/resolve_template.py codebase-context-template --json" in content
+    assert "scripts/python/resolve_template.py codebase-template --json" in content
     assert "MCP tools" in content
     assert "codebase-memory-mcp cli --json <tool>" in content
     assert "--mode full" in content
@@ -124,7 +124,7 @@ def test_generator_and_output_template_resolve_without_core_layers(tmp_path):
     command_layers = resolver.collect_all_layers(GENERATOR_COMMAND_NAME, "command")
     assert len(command_layers) == 1
     assert command_layers[0]["strategy"] == "replace"
-    assert command_layers[0]["source"] == "codebase-context v1.2.0"
+    assert command_layers[0]["source"] == "codebase v1.2.0"
     assert resolver.resolve_core(GENERATOR_COMMAND_NAME, "command") is None
     assert resolver.resolve_content(GENERATOR_COMMAND_NAME, "command") == (
         PRESET_DIR / "commands" / f"{GENERATOR_COMMAND_NAME}.md"
@@ -133,7 +133,7 @@ def test_generator_and_output_template_resolve_without_core_layers(tmp_path):
     template_layers = resolver.collect_all_layers(OUTPUT_TEMPLATE_NAME, "template")
     assert len(template_layers) == 1
     assert template_layers[0]["strategy"] == "replace"
-    assert template_layers[0]["source"] == "codebase-context v1.2.0"
+    assert template_layers[0]["source"] == "codebase v1.2.0"
     assert resolver.resolve_core(OUTPUT_TEMPLATE_NAME, "template") is None
     assert resolver.resolve_content(OUTPUT_TEMPLATE_NAME, "template") == (
         PRESET_DIR / "templates" / f"{OUTPUT_TEMPLATE_NAME}.md"
@@ -147,7 +147,7 @@ def test_output_template_has_stable_schema_and_override_markers():
 
     assert template.startswith("---\n")
     assert 'schema_version: "1.0"' in template
-    assert 'generator: "speckit.codebase-context"' in template
+    assert 'generator: "speckit.codebase"' in template
     assert 'evidence_tier: "verify"' in template
     for section_number in range(1, 15):
         assert f"## {section_number}." in template
@@ -169,7 +169,7 @@ def test_codebase_rules_are_embedded_in_the_original_workflow_positions():
         encoding="utf-8"
     )
 
-    assert plan.index(".specify/memory/codebase-context.md") < plan.index(
+    assert plan.index(".specify/memory/codebase.md") < plan.index(
         "## Mandatory Post-Execution Hooks"
     )
     assert plan.index("Prefer an available code graph") > plan.index(
@@ -182,17 +182,17 @@ def test_codebase_rules_are_embedded_in_the_original_workflow_positions():
     assert "DAO or persistence registration point" not in plan
     assert "entity base classes and primary-key strategies" not in plan
     assert "controller and response-wrapper conventions" not in plan
-    assert tasks.index(".specify/memory/codebase-context.md") < tasks.index(
+    assert tasks.index(".specify/memory/codebase.md") < tasks.index(
         "## Mandatory Post-Execution Hooks"
     )
     assert "repository, mapper, ORM, schema-registration" in tasks
     assert "migration, compatibility, and validation tasks" in tasks
-    assert implement.index(".specify/memory/codebase-context.md") < implement.index(
+    assert implement.index(".specify/memory/codebase.md") < implement.index(
         "4. **Project Setup Verification**"
     )
     assert "confirm it is still supported" in implement
     assert "report the substitution in the implementation summary" in implement
-    assert analyze.index(".specify/memory/codebase-context.md") < analyze.index(
+    assert analyze.index(".specify/memory/codebase.md") < analyze.index(
         "### 3. Build Semantic Models"
     )
     assert analyze.index("#### G. Repository Alignment (Optional)") > analyze.index(
@@ -211,7 +211,7 @@ def test_readme_documents_generator_and_context_contract():
     readme = (PRESET_DIR / "README.md").read_text(encoding="utf-8")
 
     assert "one standalone generator command" in readme
-    assert "`speckit.codebase-context`" in readme
+    assert "`speckit.codebase`" in readme
     assert "Spring Boot Maven profile" in readme
     assert "Project Overrides" in readme
     assert "`--replace-existing`" in readme

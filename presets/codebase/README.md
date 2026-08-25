@@ -1,10 +1,10 @@
 # Codebase Context
 
 This preset generates verified repository context at
-`.specify/memory/codebase-context.md` and makes the core `plan`, `tasks`,
+`.specify/memory/codebase.md` and makes the core `plan`, `tasks`,
 `analyze`, and `implement` workflows consume it.
 
-It provides one standalone generator command, `speckit.codebase-context`, and
+It provides one standalone generator command, `speckit.codebase`, and
 replaces four core commands with complete English command files based on Spec
 Kit v1.0.1. The codebase-aware instructions are embedded at the same workflow
 points as the original customized skills, while the original script selection,
@@ -16,7 +16,7 @@ resynchronize them when upgrading Spec Kit.
 
 ## Generator
 
-Run `speckit.codebase-context` through the active coding agent after installing
+Run `speckit.codebase` through the active coding agent after installing
 the preset. The command:
 
 - prefers the codebase-memory-mcp tool surface and falls back to its local CLI;
@@ -43,7 +43,7 @@ source, build files, configuration, tests, or deployment artifacts.
 Generated files carry this ownership marker in frontmatter:
 
 ```yaml
-generator: "speckit.codebase-context"
+generator: "speckit.codebase"
 ```
 
 The generator refreshes an owned file only when its schema and Project
@@ -67,7 +67,7 @@ consumer follows the unmodified core workflow.
 
 | Command | Added behavior |
 |---------|----------------|
-| `speckit.codebase-context` | Generates or refreshes verified repository context with a generic baseline and optional Spring Boot Maven profile. |
+| `speckit.codebase` | Generates or refreshes verified repository context with a generic baseline and optional Spring Boot Maven profile. |
 | `speckit.plan` | Uses existing architecture and conventions to fill Technical Context, focus repository discovery, limit external research, and shape data models and contracts. |
 | `speckit.tasks` | Uses module and persistence conventions to anchor Setup and Foundational tasks in the existing codebase. |
 | `speckit.analyze` | Optionally checks plan and task references against repository context and corroborating repository evidence before implementation. |
@@ -78,14 +78,14 @@ consumer follows the unmodified core workflow.
 From a Spec Kit project, install this checkout as a development preset:
 
 ```bash
-specify preset add --dev /path/to/spec-kit/presets/codebase-context
+specify preset add --dev /path/to/spec-kit/presets/codebase
 ```
 
 Verify the resolved generator, output template, and consumer commands:
 
 ```bash
-specify preset resolve speckit.codebase-context
-specify preset resolve codebase-context-template
+specify preset resolve speckit.codebase
+specify preset resolve codebase-template
 specify preset resolve speckit.plan
 specify preset resolve speckit.tasks
 specify preset resolve speckit.analyze
@@ -95,5 +95,5 @@ specify preset resolve speckit.implement
 Remove it with:
 
 ```bash
-specify preset remove codebase-context
+specify preset remove codebase
 ```

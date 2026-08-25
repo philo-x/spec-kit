@@ -1,6 +1,6 @@
 ---
 schema_version: "1.0"
-generator: "speckit.codebase-context"
+generator: "speckit.codebase"
 analysis_profiles:
   - generic
 source_commit: "[SOURCE_COMMIT]"

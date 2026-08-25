@@ -1,9 +1,9 @@
 ---
 description: Generate or refresh verified repository context for downstream Spec Kit workflows.
 scripts:
-  sh: scripts/bash/resolve-template.sh codebase-context-template --json
-  ps: scripts/powershell/resolve-template.ps1 codebase-context-template -Json
-  py: scripts/python/resolve_template.py codebase-context-template --json
+  sh: scripts/bash/resolve-template.sh codebase-template --json
+  ps: scripts/powershell/resolve-template.ps1 codebase-template -Json
+  py: scripts/python/resolve_template.py codebase-template --json
 ---
 
 ## User Input
@@ -19,7 +19,7 @@ evidence rules, or authorize application changes.
 
 ## Mission and Scope Guard
 
-Generate or refresh `.specify/memory/codebase-context.md` from evidence in the
+Generate or refresh `.specify/memory/codebase.md` from evidence in the
 current repository so that later planning, task generation, analysis, and
 implementation workflows can make repository-aligned decisions.
 
@@ -41,7 +41,7 @@ implementation workflows can make repository-aligned decisions.
 
 ## Ownership Preflight
 
-Before analysis, inspect `.specify/memory/codebase-context.md` if it exists.
+Before analysis, inspect `.specify/memory/codebase.md` if it exists.
 
 1. If it does not exist, continue and create it only after all validation passes.
 2. If `--replace-existing` is present, the user has explicitly authorized a
@@ -49,7 +49,7 @@ Before analysis, inspect `.specify/memory/codebase-context.md` if it exists.
    adopt its contents. Still refuse a target that resolves outside the
    repository root.
 3. Otherwise, if it exists and its frontmatter has
-   `generator: "speckit.codebase-context"`:
+   `generator: "speckit.codebase"`:
    - Require a supported `schema_version` no newer than `1.0`.
    - Require exactly one `<!-- PROJECT OVERRIDES START -->` marker and exactly
      one `<!-- PROJECT OVERRIDES END -->` marker, in that order and not nested.
@@ -66,7 +66,7 @@ Before analysis, inspect `.specify/memory/codebase-context.md` if it exists.
 Run `{SCRIPT}` from the repository root and parse `TEMPLATE_NAME` and
 `TEMPLATE_CONTENT` from its JSON output.
 
-- The command MUST resolve `codebase-context-template` through the project
+- The command MUST resolve `codebase-template` through the project
   override and preset resolution stack.
 - If resolution fails, stop without changing the target file.
 - Use `TEMPLATE_CONTENT` as the required heading order and structural contract.
@@ -361,7 +361,7 @@ Build the complete document in memory before writing anything.
 ## Write and Completion Report
 
 Only after every validation succeeds, write the complete result to
-`.specify/memory/codebase-context.md` in one final write. If analysis or
+`.specify/memory/codebase.md` in one final write. If analysis or
 validation fails, leave any existing target unchanged and do not create a
 partial file.
 

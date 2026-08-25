@@ -103,7 +103,7 @@ Load only the minimal necessary context from each artifact:
 
 - Load `/memory/constitution.md` for principle validation
 
-**From codebase context (if `.specify/memory/codebase-context.md` exists):**
+**From codebase context (if `.specify/memory/codebase.md` exists):**
 
 - Module and package map
 - Persistence and data-access integration points
@@ -160,7 +160,7 @@ Focus on high-signal findings. Limit to 50 findings total; aggregate remainder i
 
 #### G. Repository Alignment (Optional)
 
-Run this pass only when `.specify/memory/codebase-context.md` exists; otherwise skip it silently.
+Run this pass only when `.specify/memory/codebase.md` exists; otherwise skip it silently.
 
 - Compare module names, package locations, and file paths in plan.md and tasks.md with the documented repository structure
 - Check persistence/data-access integration points and interface-boundary conventions for mismatches
@@ -180,7 +180,7 @@ Use this heuristic to prioritize findings:
 
 For Repository Alignment findings:
 
-- A mismatch supported only by `codebase-context.md` MUST NOT exceed MEDIUM
+- A mismatch supported only by `codebase.md` MUST NOT exceed MEDIUM
 - A mismatch corroborated by current source, build, CI, or repository configuration may be HIGH
 - Constitution conflicts remain CRITICAL under the Constitution Authority rule
 
@@ -283,4 +283,3 @@ After reporting, check if `.specify/extensions.yml` exists in the project root.
 ## Context
 
 {ARGS}
-

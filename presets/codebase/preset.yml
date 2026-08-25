@@ -1,7 +1,7 @@
 schema_version: "1.0"
 
 preset:
-  id: "codebase-context"
+  id: "codebase"
   name: "Codebase Context"
   version: "1.2.0"
   description: "Generate verified repository context and use it across planning, tasks, analysis, and implementation"
@@ -14,8 +14,8 @@ requires:
 provides:
   templates:
     - type: "command"
-      name: "speckit.codebase-context"
-      file: "commands/speckit.codebase-context.md"
+      name: "speckit.codebase"
+      file: "commands/speckit.codebase.md"
       description: "Generate or refresh verified repository context"
       strategy: "replace"
 
@@ -44,8 +44,8 @@ provides:
       strategy: "replace"
 
     - type: "template"
-      name: "codebase-context-template"
-      file: "templates/codebase-context-template.md"
+      name: "codebase-template"
+      file: "templates/codebase-template.md"
       description: "Stable output structure for verified repository context"
       strategy: "replace"
 
