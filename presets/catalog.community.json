@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "updated_at": "2026-10-07T00:00:00Z",
+  "updated_at": "2026-10-09T00:00:00Z",
   "catalog_url": "https://raw.githubusercontent.com/github/spec-kit/main/presets/catalog.community.json",
   "presets": {
     "a11y-governance": {
@@ -258,16 +258,16 @@
     "codebase-memory-context": {
       "name": "Verified Codebase Context",
       "id": "codebase-memory-context",
-      "version": "1.0.1",
-      "description": "Generates evidence-qualified repository context with codebase-memory-mcp and applies it across planning, tasks, analysis, and implementation.",
+      "version": "1.1.0",
+      "description": "Generate evidence-qualified repository context and use it across planning, tasks, analysis, and implementation",
       "author": "Xu Yin (philo-x)",
       "repository": "https://github.com/philo-x/spec-kit-preset-codebase-memory-context",
-      "download_url": "https://github.com/philo-x/spec-kit-preset-codebase-memory-context/archive/refs/tags/v1.0.1.zip",
-      "homepage": "https://github.com/philo-x/spec-kit-preset-codebase-memory-context",
-      "documentation": "https://github.com/philo-x/spec-kit-preset-codebase-memory-context/blob/v1.0.1/README.md",
       "license": "MIT",
+      "download_url": "https://github.com/philo-x/spec-kit-preset-codebase-memory-context/releases/download/v1.1.0/codebase-memory-context.zip",
+      "homepage": "https://github.com/philo-x/spec-kit-preset-codebase-memory-context",
+      "documentation": "https://github.com/philo-x/spec-kit-preset-codebase-memory-context/blob/v1.1.0/README.md",
       "requires": {
-        "speckit_version": ">=1.0.1"
+        "speckit_version": ">=1.1.2"
       },
       "provides": {
         "templates": 1,
@@ -280,7 +280,7 @@
         "workflow"
       ],
       "created_at": "2026-08-26T00:00:00Z",
-      "updated_at": "2026-08-26T00:00:00Z"
+      "updated_at": "2026-10-09T00:00:00Z"
     },
     "command-density": {
       "name": "Command Density",
@@ -994,8 +994,8 @@
       "name": "Software Humano",
       "id": "software-humano",
       "version": "2.0.3",
-      "description": "Compiles the requirements of the Software Humano manifesto into the eight core Spec Kit commands and into the spec, plan and tasks templates, quoting the manifesto's literal text rather than rephrasing it. Treats the cost a product transfers to the person — attention, learning, decisions they did not come to make — as something budgeted and verified.",
-      "author": "Damián Acuña",
+      "description": "Compiles the requirements of the Software Humano manifesto into the eight core Spec Kit commands and into the spec, plan and tasks templates, quoting the manifesto's literal text rather than rephrasing it. Treats the cost a product transfers to the person \u2014 attention, learning, decisions they did not come to make \u2014 as something budgeted and verified.",
+      "author": "Dami\u00e1n Acu\u00f1a",
       "repository": "https://github.com/dacunao/software-humano-speckit",
       "download_url": "https://github.com/dacunao/software-humano-speckit/releases/download/preset-software-humano-v2.0.3/Software_Humano_Preset_v2.0.3.zip",
       "sha256": "c5e9725a8aea834329fe9d7f456c9f0baabedcedad3fb4c2645b83536899e069",
